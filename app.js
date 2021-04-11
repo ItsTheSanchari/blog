@@ -1,7 +1,10 @@
 const express = require('express')
+const dotenv = require('dotenv');
 //bodyparser
 const bodyparser = require('body-parser')
-
+//mongoose
+const mongoose = require('mongoose');
+dotenv.config();
 //feed routes
 const feedRoutes = require('./routes/feed')
 const app = express()
@@ -13,4 +16,9 @@ app.use((req,res,next)=>{
     next()
 })
 app.use('/feed',feedRoutes)
-app.listen(4000)
+mongoose.connect(process.env.URI,{useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+    console.log('connected')
+    app.listen(4000)
+}).catch((err) =>{
+    console.log('error connecting to db',err)
+})
