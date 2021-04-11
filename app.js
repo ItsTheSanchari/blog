@@ -6,6 +6,7 @@ const bodyparser = require('body-parser')
 const mongoose = require('mongoose');
 dotenv.config();
 //feed routes
+const authRoutes = require('./routes/auth')
 const feedRoutes = require('./routes/feed')
 const app = express()
 app.use(bodyparser.json())
@@ -16,6 +17,7 @@ app.use((req,res,next)=>{
     next()
 })
 app.use('/feed',feedRoutes)
+app.use(authRoutes)
 mongoose.connect(process.env.URI,{useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
     console.log('connected')
     app.listen(4000)
