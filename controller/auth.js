@@ -6,11 +6,9 @@ exports.createUser = async (req,res,next) => {
     const fullName = req.body.fullName
     const saltRound = 10
     try {
-        console.log('createUser')
         const UserFound = await User.find({
             email:email
         })
-        console.log('UserFound',UserFound)
         if(!UserFound.length) {
             //generate hash and create User
             const hashedPass = await this.generateHash(password,saltRound)
@@ -42,6 +40,5 @@ exports.createUser = async (req,res,next) => {
             resolve(hash)
         })
     })
-    console.log('hashedPass',hashedPass)
     return hashedPass
 }
