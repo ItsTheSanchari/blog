@@ -15,18 +15,22 @@ exports.createUser = async (req,res,next) => {
             //generate hash and create User
             const hashedPass = await this.generateHash(password,saltRound)
             if(hashedPass) {
-                
+                const user = new User({
+                email:email,
+                password:hashedPass,
+                fullName:fullName
+            })
+            await user.save()
+            res.status(200).json({
+                msg : 'Yay! user created'
+            })
             }
         }
     } catch(err) {
 
     }
 
-    // const user = new User({
-    //     email:email,
-    //     password:password,
-    //     fullName:fullName
-    // })
+    
 }
  exports.generateHash = async (password,saltRound)=> {
     let hashedPass = null
