@@ -50,7 +50,7 @@ exports.login = async(req,res,next) => {
       email:email  
     })
    if(!user) {
-    return res.status(500).json({
+    return res.status(401).json({
         msg : 'User does not exists!'
     }) 
    }
