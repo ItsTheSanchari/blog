@@ -42,3 +42,30 @@ exports.createUser = async (req,res,next) => {
     })
     return hashedPass
 }
+exports.login = async(req,res,next) => {
+    const email = req.body.email
+    const pass = req.body.pass
+
+   const user = await User.findOne({
+      email:email  
+    })
+   if(!user) {
+    return res.status(500).json({
+        msg : 'User does not exists!'
+    }) 
+   }
+   if(user) {
+    const match = await bcrypt.compare(pass, user.password);
+    if(match) {
+       res.status(200).json({
+           msg:'Yay! Logged in'
+       })
+    } else {
+        res.status(500).json({
+            msg:'Password does not match'
+        })
+    }
+   }
+   
+
+}
