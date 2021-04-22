@@ -7,5 +7,5 @@ const feedController = require('../controller/feed')
 
 const router = express.Router()
 router.get('/post',isAuth.validateRoute,feedController.getAllFeeds)
-router.post('/post',validation.feedValidationRules(),validation.validate,feedController.createFeed)
+router.post('/post',isAuth.validateRoute,validation.feedValidationRules(),validation.validate,feedController.createFeed)
 module.exports = router
