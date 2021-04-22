@@ -20,7 +20,8 @@ const FeedSchema = new schema({
     },
     added_by : {
         type: schema.Types.ObjectId,
-        required:true
+        required:true,
+        ref:'User'
     }
 })
 module.exports = mongoose.model('Feed',FeedSchema)
