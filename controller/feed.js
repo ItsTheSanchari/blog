@@ -13,7 +13,8 @@ exports.createFeed = (req,res,next) => {
         title:title,
         description:description,
         created_at:Date.now(),
-        updated_at:Date.now()
+        updated_at:Date.now(),
+        added_by:req.userId
     })
     feed.save().then((createdFeed) => {
         if(createdFeed) {

@@ -17,6 +17,10 @@ const FeedSchema = new schema({
     updated_at: {
         type:Date,
         required:true
+    },
+    added_by : {
+        type: schema.Types.ObjectId,
+        required:true
     }
 })
 module.exports = mongoose.model('Feed',FeedSchema)
