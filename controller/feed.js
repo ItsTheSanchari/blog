@@ -1,7 +1,9 @@
 const Feed = require("../models/Feed")
 
 exports.getAllFeeds = (req,res,next) => {
-    Feed.find({}).then((allFeeds)=>{
+    Feed.find({
+        'added_by':req.userId
+    }).then((allFeeds)=>{
         res.status(200).json(allFeeds)
     })
     
