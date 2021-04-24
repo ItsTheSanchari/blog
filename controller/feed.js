@@ -26,6 +26,11 @@ exports.createFeed = (req,res,next) => {
 }
 exports.getFeedDetails = async(req,res,next) => {
     const feedId = req.body.feedId
+    if(!feedId) {
+        res.status(422).json({
+            msg:'You need to select a feed'
+        })
+    }
     try {
         const feedDetails = await Feed.findById(feedId)
         res.status(200).json({
@@ -43,6 +48,11 @@ exports.editFeedDetails = async(req,res,next) => {
     const feedId = req.body.feedId
     const feedTitle = req.body.title
     const feedDetails = req.body.desc
+    if(!feedId) {
+        res.status(422).json({
+            msg:'You need to select a feed'
+        })
+    }
     try {
         const feed = await Feed.findOne({
             _id:feedId,
@@ -71,7 +81,11 @@ exports.editFeedDetails = async(req,res,next) => {
 exports.deleteFeed = async(req,res,next) => {
     const feedId = req.body.feedId
     userId = req.userId
-
+    if(!feedId) {
+        res.status(422).json({
+            msg:'You need to select a feed'
+        })
+    }
     const feed = await Feed.findOne({
         _id:feedId,
         added_by:userId
