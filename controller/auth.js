@@ -26,7 +26,7 @@ exports.createUser = async (req,res,next) => {
             }
         }
     } catch(err) {
-
+        
     }
 
     
