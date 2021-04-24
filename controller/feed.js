@@ -68,3 +68,22 @@ exports.editFeedDetails = async(req,res,next) => {
     }
     
 }
+exports.deleteFeed = async(req,res,next) => {
+    const feedId = req.body.feedId
+    userId = req.userId
+
+    const feed = await Feed.findOne({
+        _id:feedId,
+        added_by:userId
+    })
+    if(feed) {
+        await feed.remove()
+        res.status(200).json({
+            msg:'Voila! you have deleted the record'
+        })
+    } else {
+        res.status(404).json({
+            msg:'Feed not found'
+        })
+    }
+}
